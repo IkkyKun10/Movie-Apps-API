@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/imgMovieTv"
             android:layout_width="130dp"
-            android:layout_height="150dp"
+            android:layout_height="140dp"
             tools:src="@tools:sample/avatars"
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"

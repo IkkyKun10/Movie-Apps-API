@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.riezki.latihan.moviecatalogdb.R
+import com.riezki.latihan.moviecatalogdb.callback.TvCallback
 import com.riezki.latihan.moviecatalogdb.databinding.ItemFragmentBinding
 import com.riezki.latihan.moviecatalogdb.model.TvShowItems
 
-class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
+class TvShowAdapter(private val callback: TvCallback) : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
     private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
     private val listTvShow = ArrayList<TvShowItems>()
 
@@ -32,6 +33,9 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                 binding.rating.text = tvShowItems.voteAverage.toString()
                 binding.itemDate.text = tvShowItems.firstAirDate
                 binding.description.text = tvShowItems.overview
+
+                binding.imgShare.setOnClickListener { callback.onShareClick(tvShowItems) }
+                itemView.setOnClickListener { callback.toDetail(tvShowItems) }
             }
         }
     }

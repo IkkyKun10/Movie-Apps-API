@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.riezki.latihan.moviecatalogdb.R
+import com.riezki.latihan.moviecatalogdb.callback.MovieCallback
 import com.riezki.latihan.moviecatalogdb.databinding.ItemFragmentBinding
 import com.riezki.latihan.moviecatalogdb.model.MovieItems
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieTvViewHolder>() {
-    private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
+class MovieAdapter(private val callback: MovieCallback) : RecyclerView.Adapter<MovieAdapter.MovieTvViewHolder>() {
     private val listMovies = ArrayList<MovieItems>()
 
     fun setList(movieItems: ArrayList<MovieItems>) {
@@ -24,7 +24,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieTvViewHolder>() {
         fun bind(movieItems: MovieItems) {
             with(binding) {
                 Glide.with(itemView)
-                    .load(IMAGE_BASE + movieItems.posterPath)
+                    .load(Companion.IMAGE_BASE + movieItems.posterPath)
                     .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_sync))
                     .error(R.drawable.ic_baseline_error_outline)
                     .into(imgMovieTv)
@@ -33,6 +33,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieTvViewHolder>() {
                 binding.itemDate.text = movieItems.releaseDate
                 binding.rating.text = movieItems.voteAverage.toString()
                 binding.description.text = movieItems.overview
+
+                binding.imgShare.setOnClickListener { callback.onShareClick(movieItems) }
+                itemView.setOnClickListener { callback.toDetail(movieItems) }
             }
         }
     }
@@ -49,5 +52,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieTvViewHolder>() {
 
     override fun getItemCount(): Int {
         return listMovies.size
+    }
+
+    companion object {
+        const val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
     }
 }
