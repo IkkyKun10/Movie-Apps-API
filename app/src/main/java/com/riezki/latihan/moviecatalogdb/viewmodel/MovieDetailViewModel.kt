@@ -39,22 +39,6 @@ class MovieDetailViewModel : ViewModel() {
         })
     }
 
-//    fun setGenreMovie(movieId: Int) {
-//        val client = ApiConfig.apiInsntance.getDetailMovie(movieId)
-//        client.enqueue(object : Callback<GenresItem> {
-//            override fun onResponse(call: Call<GenresItem>, response: Response<GenresItem>) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onFailure(call: Call<GenresItem>, t: Throwable) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
-//    }
-
-    // buatkan fungsi getter 2 atau lebih
-
     fun getDetailResponse() : LiveData<DetailMovieResponse?> {
         return movieDetail
     }

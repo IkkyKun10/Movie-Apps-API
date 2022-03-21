@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riezki.latihan.moviecatalogdb.R
 import com.riezki.latihan.moviecatalogdb.callback.MovieCallback
@@ -29,12 +30,12 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
         showRecylerView()
         showLoading(true)
         viewModel.setListMovie()
-        viewModel.getListMovies().observe(viewLifecycleOwner, {movies ->
+        viewModel.getListMovies().observe(viewLifecycleOwner) { movies ->
             if (movies != null) {
                 mAdapter.setList(movies)
                 showLoading(false)
             }
-        })
+        }
     }
 
     private fun showRecylerView() {
@@ -70,8 +71,10 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
     }
 
     override fun toDetail(movie: MovieItems) {
-        val intent = Intent(requireActivity(), DetailActivity::class.java)
-        intent.putExtra(DetailActivity.MOVIE_ID, movie.id)
-        startActivity(intent)
+//        val intent = Intent(requireActivity(), DetailActivity::class.java)
+//        intent.putExtra(DetailActivity.MOVIE_ID, movie.id)
+//        startActivity(intent)
+        val action = MovieFragmentDirections.actionMovieFragmentToDetailActivity(movie.id)
+        findNavController().navigate(action)
     }
 }

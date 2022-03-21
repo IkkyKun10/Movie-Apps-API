@@ -1,3 +1,4 @@
+/**
 package com.riezki.latihan.moviecatalogdb.ui.main
 
 import android.content.Intent
@@ -75,3 +76,4 @@ class TvFragment : Fragment(R.layout.main_fragment), TvCallback {
         startActivity(intent)
     }
 }
+ **/

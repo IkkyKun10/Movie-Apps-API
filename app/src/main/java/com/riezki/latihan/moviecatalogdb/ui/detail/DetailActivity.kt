@@ -2,90 +2,69 @@ package com.riezki.latihan.moviecatalogdb.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.riezki.latihan.moviecatalogdb.R
 import com.riezki.latihan.moviecatalogdb.databinding.ActivityDetailBinding
 import com.riezki.latihan.moviecatalogdb.model.*
 import com.riezki.latihan.moviecatalogdb.viewmodel.MovieDetailViewModel
-import com.riezki.latihan.moviecatalogdb.viewmodel.TvDetailViewModel
 
 class DetailActivity : AppCompatActivity() {
 
+    private val args by navArgs<DetailActivityArgs>()
+
     private lateinit var detailBinding: ActivityDetailBinding
     private val viewModelMovie by viewModels<MovieDetailViewModel>()
-    private val viewModelTv by viewModels<TvDetailViewModel>()
+//    private val viewModelTv by viewModels<TvDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(detailBinding.root)
 
-        intent.extras.let {
-            it?.getInt(MOVIE_ID).apply {
-                detailBinding.progressBar.visibility = View.VISIBLE
-                this?.let { id -> viewModelMovie.setDetailMovie(id) }
-                viewModelMovie.getDetailResponse().observe(this@DetailActivity) { movies ->
-                    if (movies != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showMovieDetailResponse(movies)
+        val id = args.movieArgs
 
-                    }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.elevation = 0f
+
+        id.let {
+            detailBinding.progressBar.visibility = View.VISIBLE
+            viewModelMovie.setDetailMovie(it)
+            viewModelMovie.getDetailResponse().observe(this@DetailActivity) { movies ->
+                if (movies != null) {
+                    detailBinding.progressBar.visibility = View.GONE
+                    showMovieDetailResponse(movies)
+                    supportActionBar?.title = movies.title
                 }
-                viewModelMovie.getGenre().observe(this@DetailActivity) { genre ->
-                    if (genre != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showMovieGenreDetail(genre)
+            }
+            viewModelMovie.getGenre().observe(this@DetailActivity) { genre ->
+                if (genre != null) {
+                    detailBinding.progressBar.visibility = View.GONE
+                    showMovieGenreDetail(genre)
 
-                    }
                 }
-                viewModelMovie.getCompanyItem().observe(this@DetailActivity) { company ->
-                    if (company != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showMovieCompany(company)
+            }
+            viewModelMovie.getCompanyItem().observe(this@DetailActivity) { company ->
+                if (company != null) {
+                    detailBinding.progressBar.visibility = View.GONE
+                    showMovieCompany(company)
 
-                    }
                 }
             }
         }
 
-        intent.extras.let {
-            it?.getInt(TV_ID).apply {
-                detailBinding.progressBar.visibility = View.VISIBLE
-                this?.let { id -> viewModelTv.setDetailTvShow(id) }
-                viewModelTv.getDetailTv().observe(this@DetailActivity) { tvShow ->
-                    if (tvShow != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showTvDetailResponse(tvShow)
 
-                    }
-                }
-                viewModelTv.getGenreTvShow().observe(this@DetailActivity) { genre ->
-                    if (genre != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showTvGenreDetail(genre)
+    }
 
-                    }
-                }
-                viewModelTv.getCompanies().observe(this@DetailActivity) { company ->
-                    if (company != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        showTvCompany(company)
-
-                    }
-                }
-                viewModelTv.getCreatedBy().observe(this@DetailActivity) { sutradara ->
-                    if (sutradara != null) {
-                        detailBinding.progressBar.visibility = View.GONE
-                        createdBy(sutradara)
-                    } else {
-                        detailBinding.progressBar.visibility = View.GONE
-                    }
-                }
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
         }
+        return true
     }
 
     private fun showMovieDetailResponse(movies: DetailMovieResponse?) {
@@ -117,6 +96,7 @@ class DetailActivity : AppCompatActivity() {
         detailBinding.txtProduction.text = company[0]?.name
     }
 
+    /**
     private fun showTvDetailResponse(tvShow: DetailTvResponse?) {
         detailBinding.txtTitle.text = tvShow?.name
         detailBinding.txtDesc.text = tvShow?.overview
@@ -149,6 +129,7 @@ class DetailActivity : AppCompatActivity() {
     private fun createdBy(sutradara: List<CreatedByItem?>?) {
         detailBinding.txtSutradara.text = if (sutradara?.size!! > 0) sutradara.get(0)?.name.toString() else "Informasi tidak ada"
     }
+    **/
 
 
     companion object {

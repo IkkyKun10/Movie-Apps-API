@@ -1,3 +1,4 @@
+/**
 package com.riezki.latihan.moviecatalogdb.ui.main
 
 import android.view.LayoutInflater
@@ -52,3 +53,4 @@ class TvShowAdapter(private val callback: TvCallback) : RecyclerView.Adapter<TvS
 
     override fun getItemCount(): Int = listTvShow.size
 }
+ **/

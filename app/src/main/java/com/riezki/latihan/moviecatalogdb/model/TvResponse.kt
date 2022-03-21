@@ -1,3 +1,4 @@
+/**
 package com.riezki.latihan.moviecatalogdb.model
 
 import android.os.Parcelable
@@ -65,3 +66,4 @@ data class TvShowItems(
 	@field:SerializedName("vote_count")
 	val voteCount: Int
 ) : Parcelable
+**/

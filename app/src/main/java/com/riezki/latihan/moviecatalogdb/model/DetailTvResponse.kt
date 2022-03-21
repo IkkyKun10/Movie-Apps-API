@@ -1,3 +1,4 @@
+/**
 package com.riezki.latihan.moviecatalogdb.model
 
 import android.os.Parcelable
@@ -92,3 +93,4 @@ data class GenresItemTv(
 	val name: String? = null
 
 ) : Parcelable
+**/
