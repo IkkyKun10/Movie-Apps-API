@@ -1,4 +1,4 @@
-package com.riezki.latihan.moviecatalogdb.api
+package com.riezki.latihan.moviecatalogdb.core.data.source.remote.network
 
 import androidx.viewbinding.BuildConfig
 import okhttp3.OkHttpClient

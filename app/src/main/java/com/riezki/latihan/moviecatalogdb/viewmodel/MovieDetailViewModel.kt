@@ -1,19 +1,30 @@
 package com.riezki.latihan.moviecatalogdb.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.riezki.latihan.moviecatalogdb.api.ApiConfig
-import com.riezki.latihan.moviecatalogdb.model.DetailMovieResponse
-import com.riezki.latihan.moviecatalogdb.model.GenresItem
-import com.riezki.latihan.moviecatalogdb.model.ProductionCompaniesItem
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.asLiveData
+import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
+import com.riezki.latihan.moviecatalogdb.core.domain.usecase.MovieUseCase
 
-class MovieDetailViewModel : ViewModel() {
+class MovieDetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel() {
 
+//    fun getDetailMovie(movieId: Int) =
+//        movieUseCase.getDetailMovie(movieId).asLiveData()
+//
+//
+//    fun getDetailGenre(movieId: Int) =
+//        movieUseCase.getGenreMovieDetail(movieId).asLiveData()
+//
+//
+//    fun getCompany(movieId: Int) =
+//        movieUseCase.getCompaniesMovieDetail(movieId).asLiveData()
+
+
+    fun setFavoriteMovie(movie: Movies, state: Boolean) =
+        movieUseCase.setFavoriteMovie(movie, state)
+
+
+
+    /**
     private val TAG = "MovieDetailViewModel"
     private var movieDetail = MutableLiveData<DetailMovieResponse?>()
     private val genreItem = MutableLiveData<List<GenresItem?>?>()
@@ -39,15 +50,17 @@ class MovieDetailViewModel : ViewModel() {
         })
     }
 
+
     fun getDetailResponse() : LiveData<DetailMovieResponse?> {
         return movieDetail
     }
 
-    fun getGenre() : MutableLiveData<List<GenresItem?>?> {
+    fun getGenre() : LiveData<List<GenresItem?>?> {
         return genreItem
     }
 
     fun getCompanyItem() : LiveData<List<ProductionCompaniesItem>?> {
         return companiItem
     }
+     **/
 }

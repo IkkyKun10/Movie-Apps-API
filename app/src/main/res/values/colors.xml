@@ -11,4 +11,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bluegreen">#032736</color>
     <color name="textDetail">#E0E0E0</color>
+    <color name="pink_fav">#ff0586</color>
 </resources>

@@ -4,97 +4,144 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.viewModels
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.riezki.latihan.moviecatalogdb.R
+import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.databinding.ActivityDetailBinding
-import com.riezki.latihan.moviecatalogdb.model.*
 import com.riezki.latihan.moviecatalogdb.viewmodel.MovieDetailViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
 
     private val args by navArgs<DetailActivityArgs>()
 
     private lateinit var detailBinding: ActivityDetailBinding
-    private val viewModelMovie by viewModels<MovieDetailViewModel>()
+    private val viewModelMovie: MovieDetailViewModel by viewModel()
 //    private val viewModelTv by viewModels<TvDetailViewModel>()
+    private var stateFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(detailBinding.root)
 
-        val id = args.movieArgs
+        val id = args.movieArgs.movieId
+        val movie = args.movieArgs
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.hide()
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0f
 
-        id.let {
-            detailBinding.progressBar.visibility = View.VISIBLE
-            viewModelMovie.setDetailMovie(it)
-            viewModelMovie.getDetailResponse().observe(this@DetailActivity) { movies ->
-                if (movies != null) {
-                    detailBinding.progressBar.visibility = View.GONE
-                    showMovieDetailResponse(movies)
-                    supportActionBar?.title = movies.title
-                }
-            }
-            viewModelMovie.getGenre().observe(this@DetailActivity) { genre ->
-                if (genre != null) {
-                    detailBinding.progressBar.visibility = View.GONE
-                    showMovieGenreDetail(genre)
+//        id.let {
+//            viewModelMovie.getDetailMovie(id).observe(this@DetailActivity) { movies ->
+//                if (movies != null) {
+//                    when (movies) {
+//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
+//                        is Resource.Success -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            showMovieDetailResponse(movies.data)
+//                            supportActionBar?.title = movies.data?.title
+//                        }
+//                        is Resource.Error -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//
+//
+//                }
+//            }
+//            viewModelMovie.getDetailGenre(id).observe(this@DetailActivity) { genre ->
+//                if (genre != null) {
+//                    when (genre) {
+//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
+//                        is Resource.Success -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            showMovieGenreDetail(genre.data)
+//                        }
+//                        is Resource.Error -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//
+//                }
+//            }
+//            viewModelMovie.getCompany(id).observe(this@DetailActivity) { company ->
+//                if (company != null) {
+//                    when (company) {
+//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
+//                        is Resource.Success -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            showMovieCompany(company.data)
+//                        }
+//                        is Resource.Error -> {
+//                            detailBinding.progressBar.visibility = View.GONE
+//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//
+//
+//                }
+//            }
+//        }
 
-                }
-            }
-            viewModelMovie.getCompanyItem().observe(this@DetailActivity) { company ->
-                if (company != null) {
-                    detailBinding.progressBar.visibility = View.GONE
-                    showMovieCompany(company)
+        showMovieDetailResponse(movie)
+        detailBinding.backButton.setOnClickListener { onBackPressed() }
 
-                }
-            }
+        stateFavorite = movie.isFavorite
+        setStatusFavorite(stateFavorite)
+        detailBinding.favoriteButton.setOnClickListener {
+            stateFavorite = !stateFavorite
+            viewModelMovie.setFavoriteMovie(movie, stateFavorite)
+            setStatusFavorite(stateFavorite)
         }
-
-
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressed()
-        }
-        return true
-    }
-
-    private fun showMovieDetailResponse(movies: DetailMovieResponse?) {
-        detailBinding.txtDesc.text = movies?.overview
-        detailBinding.txtTitle.text = movies?.title
-        detailBinding.txtTagline.text = movies?.tagline
-        detailBinding.txtDate.text = movies?.releaseDate
-        detailBinding.txtBudget.text = this.resources.getString(R.string.budget, movies?.budget.toString())
-        detailBinding.txtSutradara.text = R.string.none.toString()
+    private fun showMovieDetailResponse(movies: Movies?) {
+        detailBinding.overview.text = movies?.overview
+        detailBinding.titleDetail.text = movies?.title
+//      detailBinding.txtTagline.text = movies?.tagline
+        detailBinding.date.text = movies?.realeaseDate
+        detailBinding.popularity.text = "Informasi Tidak Tersedia"
+        detailBinding.userScore.text = movies?.voteAverage.toString()
+//      detailBinding.txtBudget.text = this.resources.getString(R.string.budget, movies?.budget.toString())
+//      detailBinding.txtSutradara.text = R.string.none.toString()
 
         Glide.with(this)
             .load(BASE_URL_IMAGE + movies?.posterPath)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_sync))
             .error(R.drawable.ic_baseline_error_outline)
-            .into(detailBinding.poster)
+            .into(detailBinding.subPoster)
 
         Glide.with(this)
             .load(BASE_URL_IMAGE + movies?.backdropPath)
             .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_sync))
             .error(R.drawable.ic_baseline_error_outline)
-            .into(detailBinding.bgPoster)
+            .into(detailBinding.posterTopBar)
     }
 
-    private fun showMovieGenreDetail(genre: List<GenresItem?>) {
-        detailBinding.txtGenre.text = genre[0]?.name
+    private fun setStatusFavorite(statusFavorite: Boolean) {
+        if (statusFavorite) {
+            detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+        } else {
+            detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
+        }
     }
 
-    private fun showMovieCompany(company: List<ProductionCompaniesItem?>) {
-        detailBinding.txtProduction.text = company[0]?.name
-    }
+//    private fun showMovieGenreDetail(genre: List<DomainGenresItem>?) {
+//        detailBinding.txtGenre.text = genre?.get(0)?.name
+//    }
+//
+//    private fun showMovieCompany(company: List<DomainProductionCompaniesItem>?) {
+//        detailBinding.txtProduction.text = company?.get(0)?.name
+//    }
 
     /**
     private fun showTvDetailResponse(tvShow: DetailTvResponse?) {

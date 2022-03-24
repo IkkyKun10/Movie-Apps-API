@@ -1,41 +1,61 @@
 package com.riezki.latihan.moviecatalogdb.ui.main
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.riezki.latihan.moviecatalogdb.R
-import com.riezki.latihan.moviecatalogdb.callback.MovieCallback
+import com.riezki.latihan.moviecatalogdb.core.data.Resource
+import com.riezki.latihan.moviecatalogdb.ui.callback.MovieCallback
+import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.databinding.MainFragmentBinding
-import com.riezki.latihan.moviecatalogdb.model.DetailMovieResponse
-import com.riezki.latihan.moviecatalogdb.model.MovieItems
-import com.riezki.latihan.moviecatalogdb.ui.detail.DetailActivity
 import com.riezki.latihan.moviecatalogdb.viewmodel.MovieViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
 
     private var _binding : MainFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var mAdapter: MovieAdapter
-    private val viewModel by viewModels<MovieViewModel>()
+
+    private val viewModel: MovieViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = MainFragmentBinding.bind(view)
 
         showRecylerView()
-        showLoading(true)
-        viewModel.setListMovie()
-        viewModel.getListMovies().observe(viewLifecycleOwner) { movies ->
+
+        viewModel.movies.observe(viewLifecycleOwner) { movies ->
             if (movies != null) {
-                mAdapter.setList(movies)
-                showLoading(false)
+                when (movies) {
+                    is Resource.Loading -> showLoading(true)
+                    is Resource.Success -> {
+                        showLoading(false)
+                        mAdapter.setList(movies.data)
+                    }
+                    is Resource.Error -> {
+                        showLoading(false)
+                        Toast.makeText(context, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
+
         }
+
+//        viewModel.setListMovie()
+//        viewModel.getListMovies().observe(viewLifecycleOwner) { movies ->
+//            if (movies != null) {
+//                mAdapter.setList(movies)
+//                showLoading(false)
+//            }
+//        }
     }
 
     private fun showRecylerView() {
@@ -58,23 +78,23 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
         _binding = null
     }
 
-    override fun onShareClick(movie: MovieItems) {
+    override fun onShareClick(movieResponse: Movies) {
         if (activity != null) {
             val mimeType = "text/plain"
             ShareCompat.IntentBuilder
                 .from(requireActivity())
                 .setType(mimeType)
                 .setChooserTitle("Bagikan Judul ini sekarang.")
-                .setText("Segera tonton ${movie.originalTitle} di bioskop terdekat anda")
+                .setText("Segera tonton ${movieResponse.title} di bioskop terdekat anda")
                 .startChooser()
         }
     }
 
-    override fun toDetail(movie: MovieItems) {
+    override fun toDetail(movieResponse: Movies) {
 //        val intent = Intent(requireActivity(), DetailActivity::class.java)
 //        intent.putExtra(DetailActivity.MOVIE_ID, movie.id)
 //        startActivity(intent)
-        val action = MovieFragmentDirections.actionMovieFragmentToDetailActivity(movie.id)
+        val action = MovieFragmentDirections.actionMovieFragmentToDetailActivity(movieResponse)
         findNavController().navigate(action)
     }
 }

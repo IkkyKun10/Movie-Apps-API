@@ -1,20 +1,14 @@
 package com.riezki.latihan.moviecatalogdb.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.riezki.latihan.moviecatalogdb.api.ApiConfig
-import com.riezki.latihan.moviecatalogdb.model.MovieItems
-import com.riezki.latihan.moviecatalogdb.model.MovieResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.lifecycle.asLiveData
+import com.riezki.latihan.moviecatalogdb.core.domain.usecase.MovieUseCase
 
-class MovieViewModel : ViewModel() {
-    private val TAG = "MovieViewModel"
-    private var listMovie = MutableLiveData<ArrayList<MovieItems>>()
+class MovieViewModel(movieUseCase: MovieUseCase) : ViewModel() {
+    val movies = movieUseCase.getAllMovies().asLiveData()
 
+
+    /**
     fun setListMovie() {
         val client = ApiConfig.apiInsntance.getListMovie()
         client.enqueue(object : Callback<MovieResponse> {
@@ -36,4 +30,5 @@ class MovieViewModel : ViewModel() {
     fun getListMovies() : LiveData<ArrayList<MovieItems>> {
         return listMovie
     }
+    **/
 }

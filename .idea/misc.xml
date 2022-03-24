@@ -3,10 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/layout/activity_detail.xml" value="0.20677083333333332" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/background_user_score.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/card_detail_foreground.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/favorite_selector.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/ic_back.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/ic_baseline_share.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/ic_favorite.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/drawable/poster_placeholder.xml" value="0.1325" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/layout/activity_detail.xml" value="0.22" />
         <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/layout/item_fragment.xml" value="0.22083333333333333" />
         <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/layout/main_fragment.xml" value="0.21743589743589745" />
+        <entry key="..\:/Android Studio/Android Jetpack Pro/Training/MovieCatalogDb/app/src/main/res/menu/menu_main.xml" value="0.22083333333333333" />
       </map>
     </option>
   </component>

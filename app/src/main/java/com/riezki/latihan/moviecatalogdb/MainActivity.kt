@@ -2,10 +2,11 @@ package com.riezki.latihan.moviecatalogdb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.riezki.latihan.moviecatalogdb.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,18 @@ class MainActivity : AppCompatActivity() {
 //        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
 //        binding.pager.adapter = sectionPagerAdapter
         //binding.tabLayout.setupWithViewPager(binding.pager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorite -> findNavController(R.id.fragment_main_navigation).navigate(R.id.action_movieFragment_to_favoriteFragment)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
