@@ -22,45 +22,4 @@ class MovieDetailViewModel(private val movieUseCase: MovieUseCase) : ViewModel()
     fun setFavoriteMovie(movie: Movies, state: Boolean) =
         movieUseCase.setFavoriteMovie(movie, state)
 
-
-
-    /**
-    private val TAG = "MovieDetailViewModel"
-    private var movieDetail = MutableLiveData<DetailMovieResponse?>()
-    private val genreItem = MutableLiveData<List<GenresItem?>?>()
-    private val companiItem = MutableLiveData<List<ProductionCompaniesItem>?>()
-
-    fun setDetailMovie(movieId: Int) {
-        val client = ApiConfig.apiInsntance.getDetailMovie(movieId)
-        client.enqueue(object : Callback<DetailMovieResponse> {
-            override fun onResponse(call: Call<DetailMovieResponse>, response: Response<DetailMovieResponse>) {
-                if (response.isSuccessful) {
-                    movieDetail.postValue(response.body())
-                    genreItem.postValue(response.body()?.genres)
-                    companiItem.postValue(response.body()?.productionCompanies)
-                } else {
-                    Log.d(TAG, "Failure: ${response.message()}")
-                }
-            }
-
-            override fun onFailure(call: Call<DetailMovieResponse>, t: Throwable) {
-                Log.e(TAG, "Failure: ${t.message}")
-            }
-
-        })
-    }
-
-
-    fun getDetailResponse() : LiveData<DetailMovieResponse?> {
-        return movieDetail
-    }
-
-    fun getGenre() : LiveData<List<GenresItem?>?> {
-        return genreItem
-    }
-
-    fun getCompanyItem() : LiveData<List<ProductionCompaniesItem>?> {
-        return companiItem
-    }
-     **/
 }

@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.riezki.latihan.moviecatalogdb.ui.favorite.FavoriteFragment"
-        android:label="FavoriteFragment" >
+        android:label="Favorite" >
         <action
             android:id="@+id/action_favoriteFragment_to_detailActivity"
             app:destination="@id/detailActivity" />

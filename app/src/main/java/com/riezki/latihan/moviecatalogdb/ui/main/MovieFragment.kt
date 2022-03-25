@@ -1,9 +1,6 @@
 package com.riezki.latihan.moviecatalogdb.ui.main
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ShareCompat

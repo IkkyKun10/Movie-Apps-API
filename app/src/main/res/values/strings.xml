@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MovieCatalogDb</string>
+    <string name="app_name">Movie Catalog Db</string>
     <string name="movie">Movie</string>
     <string name="tv">Tv Show</string>
     <string name="img_view">imgView</string>

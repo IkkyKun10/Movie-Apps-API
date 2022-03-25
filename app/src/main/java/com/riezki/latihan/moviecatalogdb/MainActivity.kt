@@ -17,11 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        supportActionBar?.elevation = 0f
+        supportActionBar?.elevation = 0f
 
-//        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager)
-//        binding.pager.adapter = sectionPagerAdapter
-        //binding.tabLayout.setupWithViewPager(binding.pager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -30,9 +27,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var title = getString(R.string.app_name)
         when (item.itemId) {
-            R.id.favorite -> findNavController(R.id.fragment_main_navigation).navigate(R.id.action_movieFragment_to_favoriteFragment)
+            R.id.favorite -> {
+                findNavController(R.id.fragment_main_navigation).navigate(R.id.action_movieFragment_to_favoriteFragment)
+                title = getString(R.string.favorite)
+            }
         }
+        supportActionBar?.title = title
         return super.onOptionsItemSelected(item)
     }
 

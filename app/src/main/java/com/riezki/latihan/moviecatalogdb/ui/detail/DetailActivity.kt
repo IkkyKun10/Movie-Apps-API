@@ -36,62 +36,6 @@ class DetailActivity : AppCompatActivity() {
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.elevation = 0f
 
-//        id.let {
-//            viewModelMovie.getDetailMovie(id).observe(this@DetailActivity) { movies ->
-//                if (movies != null) {
-//                    when (movies) {
-//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
-//                        is Resource.Success -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            showMovieDetailResponse(movies.data)
-//                            supportActionBar?.title = movies.data?.title
-//                        }
-//                        is Resource.Error -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//
-//
-//
-//                }
-//            }
-//            viewModelMovie.getDetailGenre(id).observe(this@DetailActivity) { genre ->
-//                if (genre != null) {
-//                    when (genre) {
-//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
-//                        is Resource.Success -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            showMovieGenreDetail(genre.data)
-//                        }
-//                        is Resource.Error -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//
-//
-//                }
-//            }
-//            viewModelMovie.getCompany(id).observe(this@DetailActivity) { company ->
-//                if (company != null) {
-//                    when (company) {
-//                        is Resource.Loading -> detailBinding.progressBar.visibility = View.VISIBLE
-//                        is Resource.Success -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            showMovieCompany(company.data)
-//                        }
-//                        is Resource.Error -> {
-//                            detailBinding.progressBar.visibility = View.GONE
-//                            Toast.makeText(this, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//
-//
-//                }
-//            }
-//        }
-
         showMovieDetailResponse(movie)
         detailBinding.backButton.setOnClickListener { onBackPressed() }
 
@@ -107,12 +51,9 @@ class DetailActivity : AppCompatActivity() {
     private fun showMovieDetailResponse(movies: Movies?) {
         detailBinding.overview.text = movies?.overview
         detailBinding.titleDetail.text = movies?.title
-//      detailBinding.txtTagline.text = movies?.tagline
         detailBinding.date.text = movies?.realeaseDate
         detailBinding.popularity.text = "Informasi Tidak Tersedia"
         detailBinding.userScore.text = movies?.voteAverage.toString()
-//      detailBinding.txtBudget.text = this.resources.getString(R.string.budget, movies?.budget.toString())
-//      detailBinding.txtSutradara.text = R.string.none.toString()
 
         Glide.with(this)
             .load(BASE_URL_IMAGE + movies?.posterPath)
