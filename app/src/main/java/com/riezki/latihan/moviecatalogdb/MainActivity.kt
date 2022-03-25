@@ -5,13 +5,20 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.riezki.latihan.moviecatalogdb.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,23 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.elevation = 0f
 
-    }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_main_navigation) as NavHostFragment
+        navController = navHostFragment.findNavController()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+        val appBarConfiguration = AppBarConfiguration.Builder(
+            R.id.movieFragment, R.id.favoriteFragment
+        ).build()
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        var title = getString(R.string.app_name)
-        when (item.itemId) {
-            R.id.favorite -> {
-                findNavController(R.id.fragment_main_navigation).navigate(R.id.action_movieFragment_to_favoriteFragment)
-                title = getString(R.string.favorite)
-            }
-        }
-        supportActionBar?.title = title
-        return super.onOptionsItemSelected(item)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navBottom.setupWithNavController(navController)
     }
 
 }

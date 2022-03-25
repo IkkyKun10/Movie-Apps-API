@@ -1,6 +1,6 @@
 package com.riezki.latihan.moviecatalogdb.ui.callback
 
-import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
+import com.riezki.latihan.core.domain.model.Movies
 
 interface MovieCallback {
     fun onShareClick(movieResponse: Movies)

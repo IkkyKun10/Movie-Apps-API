@@ -2,17 +2,13 @@ package com.riezki.latihan.moviecatalogdb.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.riezki.latihan.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.R
-import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.databinding.ActivityDetailBinding
-import com.riezki.latihan.moviecatalogdb.viewmodel.MovieDetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
@@ -52,7 +48,7 @@ class DetailActivity : AppCompatActivity() {
         detailBinding.overview.text = movies?.overview
         detailBinding.titleDetail.text = movies?.title
         detailBinding.date.text = movies?.realeaseDate
-        detailBinding.popularity.text = "Informasi Tidak Tersedia"
+        detailBinding.popularity.text = getString(R.string.info_not_resource)
         detailBinding.userScore.text = movies?.voteAverage.toString()
 
         Glide.with(this)
@@ -70,7 +66,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+            detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_new_100))
         } else {
             detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
         }

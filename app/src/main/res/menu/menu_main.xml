@@ -3,8 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/favorite"
-        android:icon="@drawable/ic_favorite"
+        android:id="@+id/movieFragment"
+        android:icon="@drawable/ic_movie"
+        android:title="@string/movie"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/ic_favorite_new_100"
         android:title="@string/favorite"
         app:showAsAction="ifRoom"/>
 

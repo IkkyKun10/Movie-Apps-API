@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.riezki.latihan.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.R
-import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.databinding.ItemFragmentBinding
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ListMovieAdapter>() {

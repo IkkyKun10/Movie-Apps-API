@@ -16,9 +16,6 @@
             app:destination="@id/detailActivity"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_movieFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
     </fragment>
     <activity
         android:id="@+id/detailActivity"
@@ -27,14 +24,17 @@
         tools:layout="@layout/activity_detail" >
         <argument
             android:name="movieArgs"
-            app:argType="com.riezki.latihan.moviecatalogdb.core.domain.model.Movies" />
+            app:argType="com.riezki.latihan.core.domain.model.Movies" />
     </activity>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.riezki.latihan.moviecatalogdb.ui.favorite.FavoriteFragment"
-        android:label="Favorite" >
+        android:label="Favorite"
+        tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_favoriteFragment_to_detailActivity"
-            app:destination="@id/detailActivity" />
+            app:destination="@id/detailActivity"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"/>
     </fragment>
 </navigation>

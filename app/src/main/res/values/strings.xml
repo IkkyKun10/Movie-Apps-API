@@ -12,10 +12,12 @@
     <string name="budgets">Budget:</string>
     <string name="descriptions">Description:</string>
     <string name="foreground_poster">Foreground Poster</string>
+    <string name="info_not_resource">Information not Found</string>
     <string name="poster_background">Poster Background</string>
     <string name="poster_main">Poster Main</string>
     <string name="favorite">Favorite</string>
     <string name="overview">Overview</string>
     <string name="popularity">Popularity</string>
     <string name="back_button">Back Button</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

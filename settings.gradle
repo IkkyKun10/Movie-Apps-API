@@ -8,3 +8,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MovieCatalogDb"
 include ':app'
+include ':core'
+include ':favorite'

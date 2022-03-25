@@ -7,12 +7,11 @@ import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.riezki.latihan.core.data.Resource
+import com.riezki.latihan.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.R
-import com.riezki.latihan.moviecatalogdb.core.data.Resource
 import com.riezki.latihan.moviecatalogdb.ui.callback.MovieCallback
-import com.riezki.latihan.moviecatalogdb.core.domain.model.Movies
 import com.riezki.latihan.moviecatalogdb.databinding.MainFragmentBinding
-import com.riezki.latihan.moviecatalogdb.viewmodel.MovieViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {

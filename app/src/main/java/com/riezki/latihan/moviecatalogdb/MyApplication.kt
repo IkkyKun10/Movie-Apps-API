@@ -1,9 +1,9 @@
 package com.riezki.latihan.moviecatalogdb
 
 import android.app.Application
-import com.riezki.latihan.moviecatalogdb.core.di.databaseModule
-import com.riezki.latihan.moviecatalogdb.core.di.networkModule
-import com.riezki.latihan.moviecatalogdb.core.di.repositoryModule
+import com.riezki.latihan.core.di.databaseModule
+import com.riezki.latihan.core.di.networkModule
+import com.riezki.latihan.core.di.repositoryModule
 import com.riezki.latihan.moviecatalogdb.di.useCaseModule
 import com.riezki.latihan.moviecatalogdb.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
