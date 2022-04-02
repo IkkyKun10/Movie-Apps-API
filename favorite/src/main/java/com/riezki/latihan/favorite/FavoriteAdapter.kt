@@ -1,5 +1,6 @@
 package com.riezki.latihan.favorite
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ListMovieAdapter>()
     private val listMovies = ArrayList<Movies>()
     var onItemClick: ((Movies) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(listMovie: List<Movies>) {
         this.listMovies.clear()
         this.listMovies.addAll(listMovie)

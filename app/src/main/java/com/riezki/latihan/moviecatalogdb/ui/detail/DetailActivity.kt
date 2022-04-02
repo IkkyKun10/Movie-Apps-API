@@ -72,9 +72,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val MOVIE_ID = "movie_id"
-        const val TV_ID = "tv_id"
-
         private const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w500/"
     }
 }
