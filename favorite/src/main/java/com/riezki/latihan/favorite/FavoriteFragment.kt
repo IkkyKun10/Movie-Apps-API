@@ -25,15 +25,12 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
 
         loadKoinModules(favoriteModule)
 
-        showLoading(true)
         showRecycler()
 
         viewModelFavorite.favoriteMovie.observe(viewLifecycleOwner) { favorite ->
             if (favorite != null) {
-                showLoading(false)
                 adapter.setList(favorite)
             } else {
-                showLoading(false)
                 Toast.makeText(context, "Oops, Favorite Kosong", Toast.LENGTH_SHORT).show()
             }
         }
@@ -50,14 +47,14 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
         binding.rvMovieTv.adapter = adapter
         binding.rvMovieTv.setHasFixedSize(true)
     }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading){
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
+//
+//    private fun showLoading(isLoading: Boolean) {
+//        if (isLoading){
+//            binding.progressBar.visibility = View.VISIBLE
+//        } else {
+//            binding.progressBar.visibility = View.GONE
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

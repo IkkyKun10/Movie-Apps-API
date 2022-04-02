@@ -37,6 +37,8 @@ buildscript {
     ext.ken_burns_version = "1.0.7"
     ext.shimmer_version = "0.5.0"
 
+    ext.leak_canary = "2.4"
+
     repositories {
         google()
         mavenCentral()
