@@ -62,11 +62,6 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun onShareClick(movieResponse: Movies) {
         if (activity != null) {
             val mimeType = "text/plain"
@@ -82,5 +77,10 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
     override fun toDetail(movieResponse: Movies) {
         val action = MovieFragmentDirections.actionMovieFragmentToDetailActivity(movieResponse)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

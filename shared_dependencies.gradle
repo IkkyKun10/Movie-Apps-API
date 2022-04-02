@@ -33,9 +33,9 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-viewmodel:$koin_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
