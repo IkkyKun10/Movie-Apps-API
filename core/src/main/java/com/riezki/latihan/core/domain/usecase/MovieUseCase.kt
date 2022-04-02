@@ -8,12 +8,6 @@ interface MovieUseCase {
 
     fun getAllMovies() : Flow<Resource<List<Movies>>>
 
-//    fun getDetailMovie(movieId: Int) : Flow<Resource<DomainDetailMovie>>
-//
-//    fun getGenreMovieDetail(movieId: Int) : Flow<Resource<List<DomainGenresItem>>>
-//
-//    fun getCompaniesMovieDetail(movieId: Int) : Flow<Resource<List<DomainProductionCompaniesItem>>>
-
     fun getFavoriteMovies() : Flow<List<Movies>>
 
     fun setFavoriteMovie(movies: Movies, state: Boolean)

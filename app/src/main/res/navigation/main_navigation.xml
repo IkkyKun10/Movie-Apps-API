@@ -28,7 +28,7 @@
     </activity>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.riezki.latihan.moviecatalogdb.ui.favorite.FavoriteFragment"
+        android:name="com.riezki.latihan.favorite.FavoriteFragment"
         android:label="Favorite"
         tools:layout="@layout/main_fragment">
         <action

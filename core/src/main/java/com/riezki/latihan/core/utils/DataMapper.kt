@@ -1,16 +1,8 @@
 package com.riezki.latihan.core.utils
 
 import com.riezki.latihan.core.data.source.local.entity.MovieEntity
-import com.riezki.latihan.core.data.source.remote.response.DetailMovieResponse
-import com.riezki.latihan.core.data.source.remote.response.GenresItem
 import com.riezki.latihan.core.data.source.remote.response.MovieItemsResponse
-import com.riezki.latihan.core.data.source.remote.response.ProductionCompaniesItem
-import com.riezki.latihan.core.domain.model.DomainDetailMovie
-import com.riezki.latihan.core.domain.model.DomainGenresItem
-import com.riezki.latihan.core.domain.model.DomainProductionCompaniesItem
 import com.riezki.latihan.core.domain.model.Movies
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 
 object DataMapper {
 
@@ -57,42 +49,6 @@ object DataMapper {
             realeaseDate = data.realeaseDate,
             voteAverage = data.voteAverage,
             isFavorite = data.isFavorite
-        )
-
-    fun mapDetailResponseToDomain(input: DetailMovieResponse) : Flow<DomainDetailMovie> =
-        flowOf(
-            DomainDetailMovie(
-                title = input.title,
-                backdropPath = input.backdropPath,
-                genres = null,
-                id = input.id,
-                budget = input.budget,
-                overview = input.overview,
-                posterPath = input.posterPath,
-                productionCompanies = null,
-                releaseDate = input.releaseDate,
-                tagline = input.tagline
-            )
-        )
-
-    fun mapGenreDetailToDomain(input: List<GenresItem?>) : Flow<List<DomainGenresItem>> =
-        flowOf(
-            input.map {
-                DomainGenresItem(
-                    name = it?.name
-                )
-            }
-        )
-
-    fun mapCompanyDetailToDomain(
-        input: List<ProductionCompaniesItem?>
-    ) : Flow<List<DomainProductionCompaniesItem>> =
-        flowOf(
-            input.map {
-                DomainProductionCompaniesItem(
-                    name = it?.name
-                )
-            }
         )
 
 }

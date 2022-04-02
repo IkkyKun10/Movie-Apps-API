@@ -1,4 +1,4 @@
-package com.riezki.latihan.moviecatalogdb.ui.favorite
+package com.riezki.latihan.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

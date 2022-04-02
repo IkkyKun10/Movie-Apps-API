@@ -38,44 +38,6 @@ class MovieRepository(
 
         }.asFlow()
 
-//    override fun getDetailMovie(movieId: Int): Flow<Resource<DomainDetailMovie>> {
-//        return object : NetworkOnlyResource<DomainDetailMovie, DetailMovieResponse>() {
-//            override suspend fun loadFromNetwork(data: DetailMovieResponse): Flow<DomainDetailMovie> =
-//                DataMapper.mapDetailResponseToDomain(data)
-//
-//            override suspend fun createCall(): Flow<ApiResponse<DetailMovieResponse>> {
-//                return remoteDataSource.getDetailMovies(movieId)
-//            }
-//
-//        }.asFlow()
-//    }
-//
-//    override fun getGenreMovieDetail(movieId: Int): Flow<Resource<List<DomainGenresItem>>> {
-//        return object : NetworkOnlyResource<List<DomainGenresItem>, List<GenresItem>>() {
-//            override suspend fun loadFromNetwork(data: List<GenresItem>): Flow<List<DomainGenresItem>> {
-//                return DataMapper.mapGenreDetailToDomain(data)
-//            }
-//
-//            override suspend fun createCall(): Flow<ApiResponse<List<GenresItem>>> {
-//                return remoteDataSource.getGenreMovies(movieId)
-//            }
-//
-//        }.asFlow()
-//    }
-//
-//    override fun getCompaniesMovieDetail(movieId: Int): Flow<Resource<List<DomainProductionCompaniesItem>>> {
-//        return object : NetworkOnlyResource<List<DomainProductionCompaniesItem>, List<ProductionCompaniesItem>>() {
-//            override suspend fun loadFromNetwork(data: List<ProductionCompaniesItem>): Flow<List<DomainProductionCompaniesItem>> {
-//                return DataMapper.mapCompanyDetailToDomain(data)
-//            }
-//
-//            override suspend fun createCall(): Flow<ApiResponse<List<ProductionCompaniesItem>>> {
-//                return remoteDataSource.getCompaniesItem(movieId)
-//            }
-//
-//        }.asFlow()
-//    }
-
 
     override fun getFavoriteMovies(): Flow<List<Movies>> {
         return localDataSource.getFavoriteMovies().map {

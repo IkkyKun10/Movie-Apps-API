@@ -1,4 +1,4 @@
-package com.riezki.latihan.moviecatalogdb.ui.favorite
+package com.riezki.latihan.favorite
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.riezki.latihan.moviecatalogdb.R
 import com.riezki.latihan.moviecatalogdb.databinding.MainFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment(R.layout.main_fragment) {
 
@@ -21,6 +22,8 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = MainFragmentBinding.bind(view)
+
+        loadKoinModules(favoriteModule)
 
         showLoading(true)
         showRecycler()

@@ -17,7 +17,6 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var detailBinding: ActivityDetailBinding
     private val viewModelMovie: MovieDetailViewModel by viewModel()
-//    private val viewModelTv by viewModels<TvDetailViewModel>()
     private var stateFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class DetailActivity : AppCompatActivity() {
         val movie = args.movieArgs
 
         supportActionBar?.hide()
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         supportActionBar?.elevation = 0f
 
         showMovieDetailResponse(movie)
@@ -71,50 +70,6 @@ class DetailActivity : AppCompatActivity() {
             detailBinding.favoriteButton.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
         }
     }
-
-//    private fun showMovieGenreDetail(genre: List<DomainGenresItem>?) {
-//        detailBinding.txtGenre.text = genre?.get(0)?.name
-//    }
-//
-//    private fun showMovieCompany(company: List<DomainProductionCompaniesItem>?) {
-//        detailBinding.txtProduction.text = company?.get(0)?.name
-//    }
-
-    /**
-    private fun showTvDetailResponse(tvShow: DetailTvResponse?) {
-        detailBinding.txtTitle.text = tvShow?.name
-        detailBinding.txtDesc.text = tvShow?.overview
-        detailBinding.txtDate.text = tvShow?.firstAirDate
-        detailBinding.txtTagline.text = tvShow?.tagline
-        detailBinding.txtBudget.text = R.string.none.toString()
-
-        Glide.with(this)
-            .load(BASE_URL_IMAGE + tvShow?.posterPath)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_sync))
-            .error(R.drawable.ic_baseline_error_outline)
-            .into(detailBinding.poster)
-
-        Glide.with(this)
-            .load(BASE_URL_IMAGE + tvShow?.backdropPath)
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_baseline_sync))
-            .error(R.drawable.ic_baseline_error_outline)
-            .into(detailBinding.bgPoster)
-    }
-
-    private fun showTvGenreDetail(genre: List<GenresItemTv?>?) {
-        //arrayListOf kemudian forEach{} & array kosong biasa ex: genre[0].toString()
-        detailBinding.txtGenre.text = if (genre?.size!! > 0) genre[0]?.name.toString() else "Informasi tidak ada"
-    }
-
-    private fun showTvCompany(company: List<ProductionCompaniesItemTv?>?) {
-        detailBinding.txtProduction.text = if (company?.size!! > 0) company.get(0)?.name.toString() else "Informasi tidak ada"
-    }
-
-    private fun createdBy(sutradara: List<CreatedByItem?>?) {
-        detailBinding.txtSutradara.text = if (sutradara?.size!! > 0) sutradara.get(0)?.name.toString() else "Informasi tidak ada"
-    }
-    **/
-
 
     companion object {
         const val MOVIE_ID = "movie_id"

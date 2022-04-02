@@ -1,4 +1,4 @@
-package com.riezki.latihan.moviecatalogdb.ui.favorite
+package com.riezki.latihan.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,12 +40,12 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ListMovieAdapter>()
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteAdapter.ListMovieAdapter {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListMovieAdapter {
         val itemFragmentBinding = ItemFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListMovieAdapter(itemFragmentBinding)
     }
 
-    override fun onBindViewHolder(holder: FavoriteAdapter.ListMovieAdapter, position: Int) {
+    override fun onBindViewHolder(holder: ListMovieAdapter, position: Int) {
         holder.bind(listMovies[position])
     }
 

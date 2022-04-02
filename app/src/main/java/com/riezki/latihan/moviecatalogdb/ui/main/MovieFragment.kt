@@ -44,14 +44,6 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
             }
 
         }
-
-//        viewModel.setListMovie()
-//        viewModel.getListMovies().observe(viewLifecycleOwner) { movies ->
-//            if (movies != null) {
-//                mAdapter.setList(movies)
-//                showLoading(false)
-//            }
-//        }
     }
 
     private fun showRecylerView() {
@@ -87,9 +79,6 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
     }
 
     override fun toDetail(movieResponse: Movies) {
-//        val intent = Intent(requireActivity(), DetailActivity::class.java)
-//        intent.putExtra(DetailActivity.MOVIE_ID, movie.id)
-//        startActivity(intent)
         val action = MovieFragmentDirections.actionMovieFragmentToDetailActivity(movieResponse)
         findNavController().navigate(action)
     }
