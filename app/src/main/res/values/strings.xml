@@ -20,4 +20,6 @@
     <string name="popularity">Popularity</string>
     <string name="back_button">Back Button</string>
     <string name="title_favorite">Favorite</string>
+    <string name="no_fav">Favorite Kosong</string>
+    <string name="something_wrong">Something Wrong!</string>
 </resources>

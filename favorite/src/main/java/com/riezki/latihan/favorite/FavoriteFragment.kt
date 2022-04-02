@@ -6,14 +6,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.riezki.latihan.moviecatalogdb.databinding.FavoriteFragmentBinding
 import com.riezki.latihan.moviecatalogdb.R
-import com.riezki.latihan.moviecatalogdb.databinding.MainFragmentBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
-class FavoriteFragment : Fragment(R.layout.main_fragment) {
+class FavoriteFragment : Fragment(R.layout.favorite_fragment) {
 
-    private var _binding: MainFragmentBinding?= null
+    private var _binding: FavoriteFragmentBinding?= null
     private val binding get() = _binding!!
     private lateinit var adapter: FavoriteAdapter
 
@@ -21,7 +21,7 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = MainFragmentBinding.bind(view)
+        _binding = FavoriteFragmentBinding.bind(view)
 
         loadKoinModules(favoriteModule)
 
@@ -30,8 +30,12 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
         viewModelFavorite.favoriteMovie.observe(viewLifecycleOwner) { favorite ->
             if (favorite != null) {
                 adapter.setList(favorite)
-            } else {
-                Toast.makeText(context, "Oops, Favorite Kosong", Toast.LENGTH_SHORT).show()
+            }
+
+            val favEmpty = favorite.isEmpty()
+            if (favEmpty) {
+                binding.viewEmpty.root.visibility = View.VISIBLE
+                Toast.makeText(context, "Favorite Empty", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -47,14 +51,6 @@ class FavoriteFragment : Fragment(R.layout.main_fragment) {
         binding.rvMovieTv.adapter = adapter
         binding.rvMovieTv.setHasFixedSize(true)
     }
-//
-//    private fun showLoading(isLoading: Boolean) {
-//        if (isLoading){
-//            binding.progressBar.visibility = View.VISIBLE
-//        } else {
-//            binding.progressBar.visibility = View.GONE
-//        }
-//    }
 
     override fun onDestroy() {
         super.onDestroy()

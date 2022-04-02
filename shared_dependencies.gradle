@@ -39,4 +39,7 @@ dependencies {
 
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
+
+    implementation "com.airbnb.android:lottie:$lottie_version"
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 }

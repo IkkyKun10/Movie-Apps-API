@@ -38,6 +38,7 @@ class MovieFragment : Fragment(R.layout.main_fragment), MovieCallback {
                     }
                     is Resource.Error -> {
                         showLoading(false)
+                        binding.viewError.root.visibility = View.VISIBLE
                         Toast.makeText(context, "Opps, Something Wrong", Toast.LENGTH_SHORT).show()
                     }
                 }
