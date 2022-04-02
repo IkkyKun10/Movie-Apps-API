@@ -39,6 +39,9 @@ buildscript {
 
     ext.leak_canary = "2.4"
 
+    ext.sql_chipper = "4.4.0"
+    ext.sql_ktx = "2.1.0"
+
     repositories {
         google()
         mavenCentral()
